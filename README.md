@@ -19,7 +19,7 @@
   + Phân tích & giải thuật
   + Chuyển ý tưởng sang code
   + Debug
-  + Tìm kiếm các trường hợp và tạo test
+  + Tạo test
   + Hoàn thiện Project
   + Tổng kết
 

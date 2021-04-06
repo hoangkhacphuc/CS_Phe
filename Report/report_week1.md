@@ -7,15 +7,15 @@
 - 
 ## 2 - Đóng góp từng thành viên
 
-### Hoàng Khắc Phúc
+#### - Hoàng Khắc Phúc
 
-### Lò Văn Quyết
+#### - Lò Văn Quyết
 
-### Đậu Bá Nhật Minh
+#### - Đậu Bá Nhật Minh
 
-### Phạm Toàn Thắng
+#### - Phạm Toàn Thắng
 
-### Nguyễn Đức Hùng
+#### - Nguyễn Đức Hùng
 
 
 

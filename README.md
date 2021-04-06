@@ -10,10 +10,6 @@
 - MVP :
 
 ## 2
-- Vướng mắc trong cài đặt môi trường lập trình :
-- Khó khăn : Thao tác file Excel trên Web
-- Đã khắc phục :
-- Công việc :
   + Phân tích, phân chia công viêc ( Done )
   + Chọn tên phần mềm ( Done )
   + Thiết kế giao diện trang web

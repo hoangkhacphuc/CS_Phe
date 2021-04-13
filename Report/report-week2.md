@@ -1,24 +1,26 @@
 # CS Phe - Creadit Support Phenikaa
 
 ## 1
-- Vướng mắc trong cài đặt môi trường lập trình :
-- Khó khăn : Thao tác file Excel trên Web
-- Đã khắc phục :
+- Chọn môi trường cho dự án
+- Tìm kiếm các test
+- Tìm hiểu cách đọc file excel
 
 ## 2 - Đóng góp từng thành viên
 
 #### - Hoàng Khắc Phúc
-Code front-end
+- Code front-end
 
 #### - Lò Văn Quyết
-Thiết kế giao diện web
+- Thiết kế giao diện web
 
 #### - Đậu Bá Nhật Minh
+- Tìm hiểu cách đọc file excel
 
 #### - Phạm Toàn Thắng
+- Tìm kiếm các test
 
 #### - Nguyễn Đức Hùng
-
+- Tìm kiếm các test
 
 
 

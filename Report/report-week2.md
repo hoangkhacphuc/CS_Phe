@@ -17,7 +17,7 @@
 - Tìm hiểu cách đọc file excel
 
 #### - Phạm Toàn Thắng
-- Tìm kiếm các test
+- Tìm kiếm các test.
 
 #### - Nguyễn Đức Hùng
 - Tìm kiếm các test

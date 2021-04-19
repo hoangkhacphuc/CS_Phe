@@ -1,0 +1,67 @@
+body {
+    background-color: #005586;
+    margin: 0;
+    font-family: 'Roboto';
+}
+
+.content {
+    margin: 10%;
+    text-align: center;
+    padding: 10%;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 20px;
+}
+
+@media only screen and (min-width: 1000px) {
+    .content {
+        margin: 5% !important;
+    }
+}
+
+.content .upload {
+    border-radius: 20px;
+    border: 2px solid #ccc;
+    padding: 20px 50px;
+    border-style:dashed;
+    outline: 0;
+    cursor: pointer;
+    text-align: center;
+    color: #505050;
+}
+
+.tb-file {
+    border: 1px solid #505050;
+    border-collapse: collapse;
+    width: 100%;
+    margin: 50px 0 0 0;
+}
+tr, td {
+    border: 1px solid #505050;
+    padding: 5px;
+}
+
+button {
+    margin-top: 50px;
+    border: 1px solid #005586;
+    padding: 7px 20px;
+    border-radius: 5px;
+    background-color: #005586;
+    color: white;
+    font-size: 16px;
+    outline: 0;
+}
+
+button:hover {
+    background-color: #00558693;
+}
+
+.sansang {
+    border-radius: 5px;
+    color: #32be5b;
+    font-size: 14px;
+}
+
+.up {
+    display: none;
+}

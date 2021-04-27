@@ -54,7 +54,7 @@
         echo "Không thể tìm thấy lớp tín chỉ. Hãy đảm bảo copy cả phần tiêu đề của danh sách lớp tín chỉ !";
         return;
     }
-
+    echo "Abc";
     
     
 ?>

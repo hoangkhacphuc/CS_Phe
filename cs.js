@@ -78,7 +78,7 @@ function Post(val)
             alert(request.responseText);
         }
     };
-    request.open("POST", "read.php", true)
-    request.setRequestHeader("Content-type", "application/json; charset=utf-8")
-    request.send(val)
+    request.open("POST", "read.php", true);
+    request.setRequestHeader("Content-type", "application/json; charset=utf-8");
+    request.send(val);
 }

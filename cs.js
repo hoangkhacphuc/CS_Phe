@@ -75,6 +75,13 @@ function Post(val)
     request= new XMLHttpRequest()
     request.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+            if (request.responseText == "")
+            {
+                document.getElementById('step1').style = "display: none;";
+                document.getElementById('step2-1').style = "";
+                document.getElementById('step2-2').style = "";
+                return;
+            }
             alert(request.responseText);
         }
     };

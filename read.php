@@ -1,4 +1,5 @@
 <?php
+    session_start();
     $input = file_get_contents('php://input');
     if ($input=="")
         return;
@@ -54,7 +55,16 @@
         echo "Không thể tìm thấy lớp tín chỉ. Hãy đảm bảo copy cả phần tiêu đề của danh sách lớp tín chỉ !";
         return;
     }
-    echo "Abc";
-    
-    
+    $_SESSION['class'] = $mon;
+    $arr = [];
+
+    for ($i=0;$i < $sum_subject;$i++)
+    {
+        if (!($mon[$i]->getGiaoVien() in_array($arr))) // error
+        {
+            echo $mon[$i]->getGiaoVien()." ";
+            $arr[count($arr)] = $mon[$i]->getGiaoVien();
+        }
+            
+    }
 ?>

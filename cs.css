@@ -74,7 +74,7 @@ button:hover {
     padding: 0 10px;
 }
 
-.item {
+.tb-file .item {
     border-radius: 15px;
     border: 2px solid #ccc;
     padding: 10px 20px;
@@ -84,3 +84,61 @@ button:hover {
     text-align: center;
     color: #505050;
 }
+
+.prior {
+    margin: 0 10%;
+    text-align: center;
+    padding: 5% 10%;
+    background-color: white;
+    border: 1px solid white;
+    border-radius: 20px;
+}
+
+.prior .session {
+    text-align: left;
+    border: 1px solid #505050;
+    display: flex;
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+.prior .session .item {
+    padding: 5px;
+    margin-left: 25px;
+}
+
+.prior .session .item label {
+    padding-left: 5px;
+}
+
+.prior .teacher {
+    margin-top: 20px;
+    text-align: left;
+    border: 1px solid #505050;
+    padding: 10px 20px;
+    font-size: 20px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+.prior .teacher .item {
+    max-width: 33%;
+    float: left;
+    padding: 5px;
+    margin-left: 25px;
+}
+
+.prior .teacher label {
+    padding-left: 5px;
+}
+
+.pri {
+    color: white;
+    font-size: 50px;
+    text-align: center;
+    padding: 30px;
+    font-weight: 600;
+    font-family: 'Times';
+}
+

@@ -15,7 +15,7 @@
 - 
 
 #### - Phạm Toàn Thắng
-- 
+- xây dựng các test đặc biệt
 
 #### - Nguyễn Đức Hùng
 - 

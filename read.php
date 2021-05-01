@@ -60,11 +60,10 @@
 
     for ($i=0;$i < $sum_subject;$i++)
     {
-        if (!($mon[$i]->getGiaoVien() in_array($arr))) // error
+        if (!in_array($mon[$i]->getGiaoVien(), $arr))
         {
-            echo $mon[$i]->getGiaoVien()." ";
-            $arr[count($arr)] = $mon[$i]->getGiaoVien();
+            array_push($arr,$mon[$i]->getGiaoVien());
         }
-            
     }
+    echo json_encode($arr);
 ?>

@@ -38,7 +38,7 @@
                 </div>
             </div>
 
-            <div class="teacher">
+            <div class="teacher" id="ID_teacher">
                 <div class="item">
                     <input type="checkbox" id="1" value="Nguyễn Văn A"><label for="1">Nguyễn Văn ANguyễn Văn A</label>
                 </div>

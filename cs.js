@@ -82,10 +82,17 @@ function Post(val)
                 document.getElementById('step2-2').style = "";
                 return;
             }
-            alert(request.responseText);
+            var str = JSON.parse(request.responseText);
+            var str2 = "";
+            for (i=0;i<str.length;i++)
+            {
+                str+= '<div class="item"><input type="checkbox" id="'+i+'" value="'+i+'"><label for="'+i+'">'+str[i]+'</label></div>';
+            }
+            document.getElementById('ID_teacher').innerHTML = str;
+            alert(str.length);
         }
     };
-    request.open("POST", "read.php", true);
+    request.open("POST", "http://dtn-phenikaa.000webhostapp.com/DTKH/upload_data.php", true);
     request.setRequestHeader("Content-type", "application/json; charset=utf-8");
     request.send(val);
 }

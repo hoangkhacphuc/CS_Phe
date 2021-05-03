@@ -13,7 +13,7 @@
 - 
 
 #### - Đậu Bá Nhật Minh
-- 
+- Tìm hiểu các năng có thể xảy ra cho giải thuật
 
 #### - Phạm Toàn Thắng
 - xây dựng các test

@@ -12,7 +12,7 @@
 - 
 
 #### - Đậu Bá Nhật Minh
-- 
+- Nghiên cứu giải thuật sắp xếp học phần
 
 #### - Phạm Toàn Thắng
 - xây dựng các test đặc biệt

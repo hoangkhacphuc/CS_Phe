@@ -12,7 +12,7 @@
 - 
 
 #### - Đậu Bá Nhật Minh
-- 
+- Tiếp tục hoàn thiện thuật toán
 
 #### - Phạm Toàn Thắng
 - 

@@ -15,7 +15,7 @@
 - Tiếp tục hoàn thiện thuật toán
 
 #### - Phạm Toàn Thắng
-- 
+-Xây dựng các test đặc biệt 
 
 #### - Nguyễn Đức Hùng
 - xây dựng các test đặc biệt

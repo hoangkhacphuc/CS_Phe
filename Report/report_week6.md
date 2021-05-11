@@ -9,7 +9,7 @@
 - Tiếp tục làm front-end
 
 #### - Lò Văn Quyết
-- 
+- tiep tuc lam front-end ( giao dien tra ve ket qua sao khi xu li data )
 
 #### - Đậu Bá Nhật Minh
 - Tiếp tục hoàn thiện thuật toán
@@ -19,6 +19,7 @@
 
 #### - Nguyễn Đức Hùng
 - xây dưng các test đặc biệt
+
 
 
 

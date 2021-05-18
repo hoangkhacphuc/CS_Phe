@@ -7,7 +7,9 @@
 ## 2 - Đóng góp từng thành viên
 
 #### - Hoàng Khắc Phúc
-- 
+-công việc tuần này : 
+-vướng mắc : 
+-công việc tuần sau: Đưa thuật toán vào để đưa ra danh sách các trường hợp đúng
 
 #### - Lò Văn Quyết
 - 
@@ -21,4 +23,3 @@
 -công việc tuần sau: hoàn thành test lỗi.
 #### - Nguyễn Đức Hùng
 - 
->>>>>>> 7c25468521172f848b950613e4e2335eae8473d5

@@ -9,7 +9,7 @@
 - Tiếp tục làm front-end
 
 #### - Lò Văn Quyết
-- tiep tuc lam front-end ( giao dien tra ve ket qua sao khi xu li data )
+- Tiếp tục làm front-end ( giao diện trả về kết quả sau khi xử lí data )
 
 #### - Đậu Bá Nhật Minh
 - Tiếp tục hoàn thiện thuật toán

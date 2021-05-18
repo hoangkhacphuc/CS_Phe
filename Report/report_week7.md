@@ -22,4 +22,7 @@
 -vướng mắc : làm 1 số test lỗi.
 -công việc tuần sau: hoàn thành test lỗi.
 #### - Nguyễn Đức Hùng
-- 
+-công việc tuần này :Xây dựng các test đặc biệt.
+-vướng mắc : làm 1 số test lỗi.
+-công việc tuần sau: hoàn thành test lỗi.
+ 

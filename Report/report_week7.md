@@ -12,7 +12,9 @@
 -công việc tuần sau: Đưa thuật toán vào để đưa ra danh sách các trường hợp đúng
 
 #### - Lò Văn Quyết
-- 
+- công việc tuần: hoàn thiện giao diện tổng thể 
+- vướng mắc: một số kĩ thuật thiết kế chưa tối ưu 
+- công việc tuần kế tiếp: tiếp tục tối ưu giao diện
 
 #### - Đậu Bá Nhật Minh
 - Debug code

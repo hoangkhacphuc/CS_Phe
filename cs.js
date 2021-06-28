@@ -75,24 +75,27 @@ function Post(val)
     request= new XMLHttpRequest()
     request.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
+            
             if (request.responseText == "")
             {
-                document.getElementById('step1').style = "display: none;";
-                document.getElementById('step2-1').style = "";
-                document.getElementById('step2-2').style = "";
                 return;
             }
             var str = JSON.parse(request.responseText);
+            document.getElementById('step1').style = "display: none;";
+            document.getElementById('step2-1').style = "";
+            document.getElementById('step2-2').style = "";
             var str2 = "";
+            
             for (i=0;i<str.length;i++)
             {
-                str+= '<div class="item"><input type="checkbox" id="'+i+'" value="'+i+'"><label for="'+i+'">'+str[i]+'</label></div>';
+                str2+= '<div class="item"><input type="checkbox" id="'+i+'" value="'+i+'"><label for="'+i+'">'+str[i]+'</label></div>';
             }
-            document.getElementById('ID_teacher').innerHTML = str;
-            alert(str.length);
+            console.log(str2);
+            document.getElementById('ID_teacher').innerHTML = str2;
+            
         }
     };
-    request.open("POST", "http://dtn-phenikaa.000webhostapp.com/DTKH/upload_data.php", true);
+    request.open("POST", "read.php", true);
     request.setRequestHeader("Content-type", "application/json; charset=utf-8");
     request.send(val);
 }

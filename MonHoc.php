@@ -1,5 +1,5 @@
 <?php
-    class MonHoc {
+    class MonHoc{
         private $MaHocPhan;
         private $TenHocPhan;
         private $TenLop;

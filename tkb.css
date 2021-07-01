@@ -1,0 +1,78 @@
+table {
+    border-collapse: collapse;
+    color: #333;
+    text-align: center;
+    background-color: white;
+}
+
+table th {
+    padding: 2px 5px;
+    font-size: 14px;
+}
+
+table td {
+    text-align: left;
+    padding: 2px 2px;
+    font-size: 16px;
+    text-align: center;
+}
+
+table, table tr, table td, table th{
+    border: 1px solid #ccc;
+    outline: 0;
+}
+
+.color1 {
+    background-color: #f90;
+}
+
+.color2 {
+    background-color: #ff0;
+}
+.color3 {
+    background-color: #f60;
+}
+.color4 {
+    background-color: #606;
+}
+.color5 {
+    background-color: #010066;
+}
+.color6 {
+    background-color: #006668;
+}
+.color7 {
+    background-color: #349800;
+}
+.color8 {
+    background-color: rgb(166, 255, 0);
+}
+.color9 {
+    background-color: #cc0001;
+}
+.color10 {
+    background-color: #ff3301;
+}
+
+.note {
+    color: white;
+    font-size: 14px;
+    margin-top: 20px;
+    text-align: start;
+}
+
+.note .item {
+    margin-top: 5px;
+}
+
+span {
+    padding: 1px 25px;
+    margin-right: 5px;
+}
+
+.thoikhoabieu {
+    margin: 20px 10%;
+    padding: 10px 20px;
+    border: 1px solid white;
+    border-radius: 5px;
+}

@@ -75,7 +75,6 @@ function Post(val)
     request= new XMLHttpRequest()
     request.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            
             if (request.responseText == "")
             {
                 return;
@@ -84,13 +83,13 @@ function Post(val)
             document.getElementById('step1').style = "display: none;";
             document.getElementById('step2-1').style = "";
             document.getElementById('step2-2').style = "";
+            document.getElementsByName("check")[0].checked = true;
             var str2 = "";
             
             for (i=0;i<str.length;i++)
             {
-                str2+= '<div class="item"><input type="checkbox" id="'+i+'" value="'+i+'"><label for="'+i+'">'+str[i]+'</label></div>';
+                str2+= '<div class="item"><input type="checkbox" name="teachername" value="'+i+'"><label for="'+i+'">'+str[i]+'</label></div>';
             }
-            console.log(str2);
             document.getElementById('ID_teacher').innerHTML = str2;
             
         }
@@ -98,4 +97,50 @@ function Post(val)
     request.open("POST", "read.php", true);
     request.setRequestHeader("Content-type", "application/json; charset=utf-8");
     request.send(val);
+}
+
+function btn2()
+{
+    var ca; // ca ưu tiên
+    var checkbox = document.getElementsByName("check");
+    for (var i = 0; i < checkbox.length; i++)
+    {
+        if (checkbox[i].checked === true)
+        {
+            ca = checkbox[i].value;
+        }
+    }
+    var gv = []; // danh sách giáo viên ưu tiên
+    checkbox = document.getElementsByName('teachername');
+    
+    for (var i = 0; i < checkbox.length; i++){
+        if (checkbox[i].checked === true){
+            gv.push(i);        
+        }
+    }
+
+    request= new XMLHttpRequest()
+    request.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+
+            if (request.responseText == "")
+            {
+                return;
+            }
+            var str = JSON.parse(request.responseText);
+            if (str[0].lastIndexOf("Tìm thấy") != -1)
+            {
+                alert(str[0]);
+            }
+            else
+            {
+
+            }
+            
+        }
+    };
+    request.open("GET", "Handle.php", true);
+    request.setRequestHeader("Content-type", "application/json; charset=utf-8");
+    request.send();
+    
 }

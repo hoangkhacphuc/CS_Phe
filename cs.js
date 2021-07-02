@@ -122,7 +122,8 @@ function btn2()
     request= new XMLHttpRequest()
     request.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-
+            console.log(request.responseText);
+            /*
             if (request.responseText == "")
             {
                 return;
@@ -136,7 +137,7 @@ function btn2()
             {
 
             }
-            
+            */
         }
     };
     request.open("GET", "Handle.php", true);

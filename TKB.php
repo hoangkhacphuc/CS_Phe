@@ -1,17 +1,17 @@
 <?php
     class TKB{
-        private $lich;
+        private $lich = [];
         
         // SET
-        function setTKB($a)
+        function setLich($a)
         {
-            $this->TKB = $lich;
+            $this->lich = $a;
         }
         
         // GET
-        function getTKB()
+        function getLich()
         {
-            return $this->TKB;
+            return $this->lich;
         }
     }
 ?>

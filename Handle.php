@@ -1,6 +1,7 @@
 <?php  
     require ("MonHoc.php");
     require ("HocPhan.php");
+    require ("TKB.php");
     session_start();
     if (!isset($_SESSION['class']))
         return;
@@ -163,6 +164,8 @@
 
     //echo print_r($kmon);
 
+    $lichhoc = [];  // chứa danh sách các TH đúng
+
     $settkb = [
         [0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0],
@@ -176,29 +179,78 @@
         [0,0,0,0,0,0,0]
     ];
 
+
+    xemten($hocphan);
+
     $monn = locmon($hocphan);
     $idhocphan = [];
     for ($i=1; $i <= count($monn); $i++)
         $idhocphan[locmon($hocphan)[$i-1]] = $i;
     //echo var_dump($kmon);
+    
     for ($i=0; $i < count($kmon); $i++)
     {
-        echo count($kmon)." ".count($kmon[$i])."\n";
+        $check = 0;
+        //echo count($kmon)." ".count($kmon[$i])."\n";
         for ($j=0; $j < count($kmon[$i]); $j++)
         {
             for ($x=0; $x < count($kmon[$i][$j]->getLichHoc()); $x++)
             {
                 for ($y = getLich($kmon[$i][$j]->getLichHoc()[$x])[1] - 1 ; $y < getLich($kmon[$i][$j]->getLichHoc()[$x])[2]; $y++)
                 {
-                    $settkb[$y][getLich($kmon[$i][$j]->getLichHoc()[$x])[0] - 2] = $idhocphan[$kmon[$i][$j]->getMaHocPhan()];
+                    if ($settkb[$y][getLich($kmon[$i][$j]->getLichHoc()[$x])[0] - 2] != 0)
+                    {
+                        $check == 1;
+                        break;
+                    }
+                    else $settkb[$y][getLich($kmon[$i][$j]->getLichHoc()[$x])[0] - 2] = $idhocphan[$kmon[$i][$j]->getMaHocPhan()];
                 }
+                if ($check == 1)
+                    break;
             }
+            if ($check == 1)
+                    break;
         }
-
-        echo var_dump($settkb);
+        if ($check == 0)
+        {
+            $z = new TKB();
+            $z->setLich($settkb);
+            array_push($lichhoc, $z);
+            xemlich($settkb);
+            $settkb = cleartkb($settkb);
+            
+        }
     }
     
-    //echo var_dump(getLich($mon[0]->getLichHoc()[0]));
+    //echo print_r($z);
+
+    function xemten($a)
+    {
+        $arr = [];
+        $arr2 = [];
+        for ($i=0;$i < count($a);$i++)
+        {
+            if (!in_array($a[$i]->getMaHocPhan(), $arr))
+            {
+                array_push($arr,$a[$i]->getMaHocPhan());
+                array_push($arr2,$a[$i]->getTenLop());
+            }
+        }
+        for ($i=0;$i < count($arr2);$i++)
+            echo $i."    ".$arr2[$i]."\n";
+        echo "\n";
+
+    }
+    function xemlich($settkb)
+    {
+        for ($i=0; $i < 10; $i++)
+        {
+            for ($j=0; $j < 7; $j++)
+                echo $settkb[$i][$j]." ";
+            echo "\n";
+        }
+        echo "\n";
+    }
 
     // Thứ 2(T8-10)
     function getLich($str)
@@ -242,11 +294,12 @@
         return false;
     }
 
-    function cleartkb()
+    function cleartkb($settkb)
     {
-        for ($i=0; $i < 8; $i++)
-            for ($j=0; $j < 10; $j++)
-                $tkb[$i][$j] = 0;
+        for ($i=0; $i < 10; $i++)
+            for ($j=0; $j < 8; $j++)
+                $settkb[$i][$j] = 0;
+        return $settkb;
     }
 
     function locmon($a)

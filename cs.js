@@ -129,12 +129,12 @@ function btn2()
             }
             if (request.responseText == "Đã tìm thấy kết quả !")
             {
-                window.location.assign("KetQua.php");
+                var hr = "KetQua.php?ca="+ca+"&gv="+gv;
+                window.location.assign(hr);
             }
         }
     };
     request.open("GET", "Handle.php", true);
     request.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
     request.send();
-    
 }

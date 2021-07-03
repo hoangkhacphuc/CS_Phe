@@ -1,3 +1,21 @@
+<?php
+    require ("MonHoc.php");
+    require ("HocPhan.php");
+    require ("TKB.php");
+    session_start();
+    if (!isset($_GET['ca']) || !isset($_GET['gv']) || !isset($_SESSION['tenhp']) || !isset($_SESSION['tkb']) || !isset($_SESSION['idmon']) || !isset($_SESSION['kqd']) || !isset($_SESSION['gv']))
+        return;
+    $output = $_SESSION['tkb'];
+    $idhocphan = $_SESSION['idmon'];
+    $tenhp = $_SESSION['tenhp'];
+    $kqdung = $_SESSION['kqd'];
+    $gv = $_SESSION['gv'];
+    $uca = $_GET['ca'];
+    $ugv = $_GET['gv'];
+    $tb = [];
+    $danhsach = $output;
+?>
+
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,129 +32,46 @@
     </head>
     <body>
         <center>
-            <div class="thoikhoabieu">
-                <table>
-                    <tr>
-                        <th>Tiết</th>
-                        <th>Thứ 2</th>
-                        <th>Thứ 3</th>
-                        <th>Thứ 4</th>
-                        <th>Thứ 5</th>
-                        <th>Thứ 6</th>
-                        <th>Thứ 7</th>
-                        <th>Chủ Nhật</th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td id='11'></td>
-                        <td id='12'></td>
-                        <td id='13'></td>
-                        <td id='14'></td>
-                        <td id='15'></td>
-                        <td id='16'></td>
-                        <td id='17'></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td id='21'></td>
-                        <td id='22'></td>
-                        <td id='23'></td>
-                        <td id='24'></td>
-                        <td id='25'></td>
-                        <td id='26'></td>
-                        <td id='27'></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td id='31'></td>
-                        <td id='32'></td>
-                        <td id='33'></td>
-                        <td id='34'></td>
-                        <td id='35'></td>
-                        <td id='36'></td>
-                        <td id='37'></td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td id='41'></td>
-                        <td id='42'></td>
-                        <td id='43'></td>
-                        <td id='44'></td>
-                        <td id='45'></td>
-                        <td id='46'></td>
-                        <td id='47'></td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td id='51'></td>
-                        <td id='52'></td>
-                        <td id='53'></td>
-                        <td id='54'></td>
-                        <td id='55'></td>
-                        <td id='56'></td>
-                        <td id='57'></td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td id='61'></td>
-                        <td id='62'></td>
-                        <td id='63'></td>
-                        <td id='64'></td>
-                        <td id='65'></td>
-                        <td id='66'></td>
-                        <td id='67'></td>
-                    </tr>
-                    <tr>
-                        <td>7</td>
-                        <td id='71'></td>
-                        <td id='72'></td>
-                        <td id='73'></td>
-                        <td id='74'></td>
-                        <td id='75'></td>
-                        <td id='76'></td>
-                        <td id='77'></td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td id='81'></td>
-                        <td id='82'></td>
-                        <td id='83'></td>
-                        <td id='84'></td>
-                        <td id='85'></td>
-                        <td id='86'></td>
-                        <td id='87'></td>
-                    </tr>
-                    <tr>
-                        <td>9</td>
-                        <td id='91'></td>
-                        <td id='92'></td>
-                        <td id='93'></td>
-                        <td id='94'></td>
-                        <td id='95'></td>
-                        <td id='96'></td>
-                        <td id='97'></td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td id='101'></td>
-                        <td id='102'></td>
-                        <td id='103'></td>
-                        <td id='104'></td>
-                        <td id='105'></td>
-                        <td id='106'></td>
-                        <td id='107'></td>
-                    </tr>
-                </table>
-                <div class="note">
-                    <div class="item">
-                        <span id="1"></span>Kỹ thuật phần mềm - KT phần mềm_2.1.20(13.IT.VJ).01_LT - Mai Xuân Tráng
-                    </div>
-                    <div class="item">
-                        <span id="2"></span>Tiếng Nhật 4 - Tiếng Nhật 4_2.1.20(13.IT-VJ).01_LT - Lê Thị Ngọc
-                    </div>
-                </div>
-            </div>
+            <?php
+                for ($i=0; $i < count($danhsach); $i++)
+                {
+                    $tb[$i] = "";
+                    for ($z=0; $z < count($kqdung[$i]); $z++)
+                    {
+                        $tb[$i] .= ">>> ".$kqdung[$i][$z]->getTenLop()." --- ".$kqdung[$i][$z]->getGiaoVien()."\n";
+                    }
+
+                    $temp = $danhsach[$i];
+                    echo "<div class='thoikhoabieu'><table id='".$i."' onclick='tb(this.id)'><tr>
+                            <th>Tiết</th>
+                            <th>Thứ 2</th>
+                            <th>Thứ 3</th>
+                            <th>Thứ 4</th>
+                            <th>Thứ 5</th>
+                            <th>Thứ 6</th>
+                            <th>Thứ 7</th>
+                            <th>Chủ Nhật</th>
+                        </tr>";
+                    for ($a=0; $a < 10; $a++)
+                    {
+                        echo "<tr><td>".($a+1)."</td>";
+                        for ($b=0; $b < 7; $b++)
+                        {
+                            if ($temp[$a][$b] != 0)
+                                echo "<td class='color".$temp[$a][$b]."'></td>";
+                            else echo "<td></td>";
+                        }
+                        echo "</tr>";
+                    }
+                    echo "</table><div class='note'>";
+                    for ($p=0; $p < count($idhocphan); $p++)
+                        echo "<div class='item'><span class='color".($p+1)."'></span>".$tenhp[$p]."</div>";
+                    echo "</div></div>";
+                    
+                }
+
+                $_SESSION['al'] = $tb;
+            ?>
         </center>
-        <script>addtkb()</script>
     </body>
 </html>

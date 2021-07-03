@@ -76,5 +76,6 @@
             array_push($arr,$mon[$i]->getGiaoVien());
         }
     }
+    $_SESSION['gv'] = $arr;
     echo json_encode($arr);
 ?>

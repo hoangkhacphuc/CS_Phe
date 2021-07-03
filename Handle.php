@@ -233,8 +233,10 @@
                                 {
                                     $check = 1;
                                 }
-                                else $settkb[$y][getLich($kmon[$i][$j]->getLichHoc()[$x])[0] - 2] = $idhocphan[$kmon[$i][$j]->getMaHocPhan()];
-                                
+                                else 
+                                {
+                                    $settkb[$y][getLich($kmon[$i][$j]->getLichHoc()[$x])[0] - 2] = $idhocphan[$kmon[$i][$j]->getMaHocPhan()];
+                                }
                             }
                         }
                     }
@@ -269,6 +271,7 @@
     echo "Đã tìm thấy kết quả !";
     $_SESSION['tkb'] = $output;
     $_SESSION['idmon'] = $idhocphan;
+    $_SESSION['tenhp'] = locten($hocphan);
     $_SESSION['kqd'] = $kqdung;
 
     // Thứ 2(T8-10)
@@ -322,6 +325,20 @@
             if (!in_array($a[$i]->getMaHocPhan(), $arr))
             {
                 array_push($arr,$a[$i]->getMaHocPhan());
+            }
+        }
+        return $arr;
+    }
+
+    function locten($a)
+    {
+        $arr = [];
+
+        for ($i=0;$i < count($a);$i++)
+        {
+            if (!in_array($a[$i]->getTenHocPhan(), $arr))
+            {
+                array_push($arr,$a[$i]->getTenHocPhan());
             }
         }
         return $arr;

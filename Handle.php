@@ -44,6 +44,7 @@
         array_push($mhoc, $k);
     }
 
+    //echo print_r($mhoc);
     for ($i=0; $i < count($mhoc); $i++)
     {
         $k = $mhoc[$i];
@@ -62,128 +63,189 @@
 
         $mhoc[$i] = $k;
     }
-    //echo var_dump($mhoc);
-    
+    //echo print_r($mhoc);
 
-    $hp = [];
-    
-    for ($i=0; $i < count(locmon($hocphan)); $i++)
+    $smon = [];  // mảng chứa các th
+
+    for ($p=0; $p < count(locmon($hocphan)); $p++)
     {
-        $hp2 = [];
-        if ($mhoc[$i]->getCheckLT() == 1)
+        $k = $mhoc[$p];
+        $kq = [];
+
+        if ( ($k->getCheckLT() && !$k->getCheckTH()) || (!$k->getCheckLT() && $k->getCheckTH()) )
         {
-            for ($j=0 ; $j < count($mhoc[$i]->getHocPhan()); $j++)
-            {
-                if ($mhoc[$i]->getHocPhan()[$j]->getThucHanh() == 0)
-                {
-                    array_push($hp2, [$i, $j]);
-                }
-            }
+            $kq = $k->getHocPhan();
+            array_push($smon, $kq);
         }
-        if (!empty($hp2))
+        else if (count($k->getHocPhan()) == 2)
         {
-            array_push($hp, $hp2);
-            $hp2 = [];
-        }
-            
-        if ($mhoc[$i]->getCheckTH() == 1)
-        {
-            for ($j=0 ; $j < count($mhoc[$i]->getHocPhan()); $j++)
-            {
-                if ($mhoc[$i]->getHocPhan()[$j]->getThucHanh() == 1)
-                {
-                    array_push($hp2, [$i, $j]);
-                }
-            }
-        }
-        if (!empty($hp2))
-            array_push($hp, $hp2);
-    }
-
-    //echo var_dump($hp);
-
-    $checkcunggiaovien = 0;
-
-    $th = [];
-    $th2 = [];  
-    for ($i=0; $i < count($hp); $i++)
-    {
-        if (count($hp[$i]) > 1)
-        {
-            $th3 = $th;
-            for ($j=0; $j < count($hp[$i]); $j++)
-                array_push($th, $th3);
-        }
-        if (checkTHduoi($i, $hp, $mhoc))
-        {
-            for ($j=0; $j < count($hp[$i]); $j++)
-            {
-                if (checkGVduoi($j, $hp, $mhoc))
-                    echo $i. ' '.$j;
-            }
-        }
-        
-    }
-        
-    function getTHduoi($a, $hp, $mhoc)
-    {
-
-    }
-/*
-    function checkGVduoi($a, $hp, $mhoc)
-    {
-        echo $hp[$a][0][0];
-        for ($i=0; $i < $hp[$a + 1]; $i++)
-            if ($mhoc[$hp[$a+1][$i][0]]->getHocPhan()[$hp[$a+1][$i][1]]->getGiaoVien() ==  $mhoc[$hp[$a][0][0]]->getHocPhan()[$hp[$a][0][1]]->getGiaoVien())
-                return true;
-        return false;
-    }
-    */
-
-    function checkTHduoi($a, $hp, $mhoc)
-    {
-        if (!isset($hp[$a + 1][0][0])  || $mhoc[$hp[$a][0][0]]->getHocPhan()[0]->getMaHocPhan() !=  $mhoc[$hp[$a + 1][0][0]]->getHocPhan()[0]->getMaHocPhan())
-            return false;
-        return true;
-    }
-    
-    /*
-    // chia nhóm
-    $nhom = [];
-    $groupid = 0;
-    $focusid = "";
-    for ($i=0; $i < count($hocphan); $i++)
-    {
-        if ($focusid == $hocphan[$i]->getMaHocPhan())
-        {
-            $nhom[$i] = $groupid;
+            $kq = $k->getHocPhan();
+            array_push($smon, $kq);
         }
         else
         {
-            $focusid = $hocphan[$i]->getMaHocPhan();
-            $groupid++;
-            $nhom[$i] = $groupid;
+            for ($i=0; $i < count($k->getHocPhan()); $i++)
+            {
+                if ($k->getHocPhan()[$i]->getThucHanh() == 0)
+                {
+                    if (checkGV($k, $i))
+                    {
+                        for ($j=0; $j < count($k->getHocPhan()); $j++)
+                        {
+                            if ($i != $j && $k->getHocPhan()[$i]->getGiaoVien() == $k->getHocPhan()[$j]->getGiaoVien() && $k->getHocPhan()[$j]->getThucHanh() == 1)
+                            {
+                                array_push($kq, [$k->getHocPhan()[$i], $k->getHocPhan()[$j]]);
+                            }
+                        }
+                        
+                    }
+                    else
+                    {
+                        for ($j=0; $j < count($k->getHocPhan()); $j++)
+                        {
+                            if ($i != $j && $k->getHocPhan()[$j]->getThucHanh() == 1)
+                                array_push($kq, [$k->getHocPhan()[$i], $k->getHocPhan()[$j]]);
+                        }
+                        //echo print_r($k->getHocPhan());
+                    }
+                }
+            }
+            array_push($smon, $kq);
         }
     }
-
-    // Duyệt trường hợp thỏa mãn
     
-    $tkb = [];
-    $loadall = 0;
-    $c_focus = 0;
+    //echo print_r($smon);
 
-    while ($loadall == 1)
+    $kmon = []; // mảng chứa list các TH
+
+    for ($i=0; $i < count($smon); $i++)
     {
-        cleartkb();
+        if (count($smon[$i]) > 1 && is_array($smon[$i][0]))
+        {
+            $q = $kmon;
+            for ($j=0; $j<(count($smon[$i]) - 1); $j++)
+            $kmon = array_merge($kmon, $q);
+            
+            $n = 0;
+            for ($j=0; $j<count($kmon); $j++)
+            {
+                if ($j == ($n+1)*(count($kmon) / count($smon[$i])))
+                    $n++;
+                //echo print_r($smon[$i][$n]);
+                array_push($kmon[$j], $smon[$i][$n][0]);
+                array_push($kmon[$j], $smon[$i][$n][1]);
+            }
+            //echo print_r($kmon);
+        }
+        else if (count($smon[$i]) > 1)
+        {
+            for ($j=0; $j<count($kmon); $j++)
+            {
+                array_push($kmon[$j], $smon[$i][0]);
+                array_push($kmon[$j], $smon[$i][1]);
+            }
+        }
+        else if (empty($kmon))
+        { 
+            array_push($kmon, []);
+            array_push($kmon[0], $smon[$i][0]);   
+        }
+        else
+        {
+            for ($j=0; $j<count($kmon); $j++)
+            {   
+                array_push($kmon[$j], $smon[$i][0]);
+            }
+            
+        }
         
-
     }
-    */
+
+    //echo print_r($kmon);
+
+    $settkb = [
+        [0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0]
+    ];
+
+    $monn = locmon($hocphan);
+    $idhocphan = [];
+    for ($i=1; $i <= count($monn); $i++)
+        $idhocphan[locmon($hocphan)[$i-1]] = $i;
+    //echo var_dump($kmon);
+    for ($i=0; $i < count($kmon); $i++)
+    {
+        echo count($kmon)." ".count($kmon[$i])."\n";
+        for ($j=0; $j < count($kmon[$i]); $j++)
+        {
+            for ($x=0; $x < count($kmon[$i][$j]->getLichHoc()); $x++)
+            {
+                for ($y = getLich($kmon[$i][$j]->getLichHoc()[$x])[1] - 1 ; $y < getLich($kmon[$i][$j]->getLichHoc()[$x])[2]; $y++)
+                {
+                    $settkb[$y][getLich($kmon[$i][$j]->getLichHoc()[$x])[0] - 2] = $idhocphan[$kmon[$i][$j]->getMaHocPhan()];
+                }
+            }
+        }
+
+        echo var_dump($settkb);
+    }
+    
+    //echo var_dump(getLich($mon[0]->getLichHoc()[0]));
+
+    // Thứ 2(T8-10)
+    function getLich($str)
+    {
+        $str2 = explode("(", $str);
+        $strthu = strtolower($str2[0]);
+        $thu = 2;
+
+        if ($strthu == "thứ 3")
+            $thu = 3;
+        else if ($strthu == "thứ 4")
+            $thu = 4;
+        else if ($strthu == "thứ 5")
+            $thu = 5;
+        else if ($strthu == "thứ 6")
+            $thu = 6;
+        else if ($strthu == "thứ 7")
+            $thu = 7;
+        else if ($strthu == "chủ nhật")
+            $thu = 8;
+
+        $t1 = 1;
+        $t2 = 1;
+
+        $strtiet = chop($str2[1], ")");
+        $strtiet2 = explode("T", $strtiet)[1];
+        $arrtiet = explode("-", $strtiet2);
+        $t1 = intval($arrtiet[0]);
+        $t2 = intval($arrtiet[1]);
+
+        return [$thu, $t1, $t2];
+    }
+
+    function checkGV($k , $a)
+    {
+        for ($i=0; $i < count($k->getHocPhan()); $i++)
+        {
+            if ($a != $i && $k->getHocPhan()[$i]->getGiaoVien() == $k->getHocPhan()[$a]->getGiaoVien() && $k->getHocPhan()[$i]->getThucHanh() == 1)
+                return true;
+        }
+        return false;
+    }
 
     function cleartkb()
     {
         for ($i=0; $i < 8; $i++)
-            for ($j=0; $j < 12; $j++)
+            for ($j=0; $j < 10; $j++)
                 $tkb[$i][$j] = 0;
     }
 

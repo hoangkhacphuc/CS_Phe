@@ -200,7 +200,7 @@
                 {
                     if ($settkb[$y][getLich($kmon[$i][$j]->getLichHoc()[$x])[0] - 2] != 0)
                     {
-                        $check == 1;
+                        $check = 1;
                         break;
                     }
                     else $settkb[$y][getLich($kmon[$i][$j]->getLichHoc()[$x])[0] - 2] = $idhocphan[$kmon[$i][$j]->getMaHocPhan()];

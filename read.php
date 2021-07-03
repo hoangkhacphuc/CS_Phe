@@ -24,6 +24,10 @@
                 $mon[$sum_subject-1]->setCaHoc($cahoc);
                 $mon[$sum_subject-1]->setLichHoc($lichhoc);
                 $mon[$sum_subject-1]->setPhongHoc($phonghoc);
+                
+                $cahoc = [];
+                $phonghoc = [];
+                $lichhoc = [];
             }
             $mon[$sum_subject] = new MonHoc();
             $mon[$sum_subject]->setMaHocPhan($json[$i]["Mã học phần"]);
@@ -49,6 +53,13 @@
             }
             $lichhoc[$num-1] = $json[$i]["Lịch học"];
         }
+    }
+    if ($num != 0 && $checkFileTinChi)
+    {
+        $num = 0;
+        $mon[$sum_subject-1]->setCaHoc($cahoc);
+        $mon[$sum_subject-1]->setLichHoc($lichhoc);
+        $mon[$sum_subject-1]->setPhongHoc($phonghoc);
     }
     if (!$checkFileTinChi)
     {

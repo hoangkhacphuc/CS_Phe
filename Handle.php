@@ -73,7 +73,7 @@
         $k = $mhoc[$p];
         $kq = [];
 
-        if ( ($k->getCheckLT() && !$k->getCheckTH()) || (!$k->getCheckLT() && $k->getCheckTH()) )
+        if (( ($k->getCheckLT() && !$k->getCheckTH()) || (!$k->getCheckLT() && $k->getCheckTH()) ))
         {
             $kq = $k->getHocPhan();
             array_push($smon, $kq);
@@ -121,11 +121,13 @@
 
     for ($i=0; $i < count($smon); $i++)
     {
+        //echo print_r($smon[$i]);
         if (count($smon[$i]) > 1 && is_array($smon[$i][0]))
         {
+            
             $q = $kmon;
             for ($j=0; $j<(count($smon[$i]) - 1); $j++)
-            $kmon = array_merge($kmon, $q);
+                $kmon = array_merge($kmon, $q);
             
             $n = 0;
             for ($j=0; $j<count($kmon); $j++)
@@ -138,13 +140,33 @@
             }
             //echo print_r($kmon);
         }
-        else if (count($smon[$i]) > 1)
+        else if ((count($smon[$i]) > 1) && $smon[$i][1]->getThucHanh() == 1 && $smon[$i][0]->getThucHanh() == 0)
         {
+            //echo print_r($smon[$i]);
             for ($j=0; $j<count($kmon); $j++)
             {
+                //echo print_r($smon[$i]);
                 array_push($kmon[$j], $smon[$i][0]);
                 array_push($kmon[$j], $smon[$i][1]);
             }
+        }
+        else if (count($smon[$i]) > 1)
+        {
+            if (empty($kmon))
+                array_push($kmon, []);
+
+            $q = $kmon;
+            for ($j=0; $j<(count($smon[$i]) - 1); $j++)
+                $kmon = array_merge($kmon, $q);
+            //echo print_r($kmon);
+            $n = 0;
+            for ($j=0; $j<count($kmon); $j++)
+            {
+                if ($j == ($n+1)*(count($kmon) / count($smon[$i])))
+                    $n++;
+                array_push($kmon[$j], $smon[$i][$n]);
+            }
+            
         }
         else if (empty($kmon))
         { 
@@ -153,6 +175,7 @@
         }
         else
         {
+            //echo print_r($smon[$i]);
             for ($j=0; $j<count($kmon); $j++)
             {   
                 array_push($kmon[$j], $smon[$i][0]);
@@ -162,7 +185,7 @@
         
     }
 
-    //echo print_r($kmon);
+    //echo var_dump($kmon);
 
     $lichhoc = [];  // chứa danh sách các TH đúng
 
@@ -186,30 +209,39 @@
     $idhocphan = [];
     for ($i=1; $i <= count($monn); $i++)
         $idhocphan[locmon($hocphan)[$i-1]] = $i;
-    //echo var_dump($kmon);
+   // echo var_dump($kmon);
     
     for ($i=0; $i < count($kmon); $i++)
     {
         $check = 0;
-        //echo count($kmon)." ".count($kmon[$i])."\n";
+        
         for ($j=0; $j < count($kmon[$i]); $j++)
         {
-            for ($x=0; $x < count($kmon[$i][$j]->getLichHoc()); $x++)
+            //echo print_r($kmon[$i][$j]->getLichHoc())."\n";
+            if ($check == 0)
             {
-                for ($y = getLich($kmon[$i][$j]->getLichHoc()[$x])[1] - 1 ; $y < getLich($kmon[$i][$j]->getLichHoc()[$x])[2]; $y++)
+                
+                for ($x=0; $x < count($kmon[$i][$j]->getLichHoc()); $x++)
                 {
-                    if ($settkb[$y][getLich($kmon[$i][$j]->getLichHoc()[$x])[0] - 2] != 0)
+                    
+                    if ($check == 0)
                     {
-                        $check = 1;
-                        break;
+                        for ($y = getLich($kmon[$i][$j]->getLichHoc()[$x])[1] - 1 ; $y < getLich($kmon[$i][$j]->getLichHoc()[$x])[2]; $y++)
+                        {
+                            if ($check == 0)
+                            {
+                                
+                                if ($settkb[$y][getLich($kmon[$i][$j]->getLichHoc()[$x])[0] - 2] != 0)
+                                {
+                                    $check = 1;
+                                }
+                                else $settkb[$y][getLich($kmon[$i][$j]->getLichHoc()[$x])[0] - 2] = $idhocphan[$kmon[$i][$j]->getMaHocPhan()];
+                                
+                            }
+                        }
                     }
-                    else $settkb[$y][getLich($kmon[$i][$j]->getLichHoc()[$x])[0] - 2] = $idhocphan[$kmon[$i][$j]->getMaHocPhan()];
                 }
-                if ($check == 1)
-                    break;
             }
-            if ($check == 1)
-                    break;
         }
         if ($check == 0)
         {
@@ -217,30 +249,39 @@
             $z->setLich($settkb);
             array_push($lichhoc, $z);
             xemlich($settkb);
-            $settkb = cleartkb($settkb);
-            
         }
+        $settkb = [
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0]
+        ];
     }
     
-    //echo print_r($z);
+    //echo print_r($lichhoc);
 
     function xemten($a)
     {
         $arr = [];
-        $arr2 = [];
+        $cc = 1;
+
         for ($i=0;$i < count($a);$i++)
         {
-            if (!in_array($a[$i]->getMaHocPhan(), $arr))
+            if (!in_array($a[$i]->getTenHocPhan(), $arr))
             {
-                array_push($arr,$a[$i]->getMaHocPhan());
-                array_push($arr2,$a[$i]->getTenLop());
+                echo $cc." ".$a[$i]->getTenHocPhan()."\n";
+                $cc++;
+                array_push($arr,$a[$i]->getTenHocPhan());
             }
         }
-        for ($i=0;$i < count($arr2);$i++)
-            echo $i."    ".$arr2[$i]."\n";
-        echo "\n";
-
     }
+
     function xemlich($settkb)
     {
         for ($i=0; $i < 10; $i++)

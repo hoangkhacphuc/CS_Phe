@@ -122,26 +122,19 @@ function btn2()
     request= new XMLHttpRequest()
     request.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
-            console.log(request.responseText);
-            /*
-            if (request.responseText == "")
-            {
-                return;
-            }
-            var str = JSON.parse(request.responseText);
-            if (str[0].lastIndexOf("Tìm thấy") != -1)
-            {
-                alert(str[0]);
-            }
-            else
-            {
 
+            if (request.responseText != "")
+            {
+                alert(request.responseText);
             }
-            */
+            if (request.responseText == "Đã tìm thấy kết quả !")
+            {
+                window.location.assign("KetQua.php");
+            }
         }
     };
     request.open("GET", "Handle.php", true);
-    request.setRequestHeader("Content-type", "application/json; charset=utf-8");
+    request.setRequestHeader("Content-type", "application/x-www-form-urlencoded; charset=UTF-8");
     request.send();
     
 }

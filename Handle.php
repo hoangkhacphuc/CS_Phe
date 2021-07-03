@@ -21,8 +21,7 @@
     if (count(locmon($hocphan)) != count(locmon($mon)))
     {
         $strout = "Tìm thấy ".(count(locmon($mon)) - count(locmon($hocphan)))." môn học không còn chỗ trống !";
-        $out =  array($strout);
-        echo json_encode($out);
+        echo $strout;
         return;
     }
 
@@ -202,15 +201,14 @@
         [0,0,0,0,0,0,0]
     ];
 
-
-    xemten($hocphan);
-
     $monn = locmon($hocphan);
     $idhocphan = [];
     for ($i=1; $i <= count($monn); $i++)
         $idhocphan[locmon($hocphan)[$i-1]] = $i;
    // echo var_dump($kmon);
     
+   $kqdung = [];
+
     for ($i=0; $i < count($kmon); $i++)
     {
         $check = 0;
@@ -248,7 +246,7 @@
             $z = new TKB();
             $z->setLich($settkb);
             array_push($lichhoc, $z);
-            xemlich($settkb);
+            array_push($kqdung, $kmon[$i]);
         }
         $settkb = [
             [0,0,0,0,0,0,0],
@@ -264,34 +262,14 @@
         ];
     }
     
-    //echo print_r($lichhoc);
+    $output = [];
+    for ($i=0; $i < count($lichhoc); $i++)
+        array_push($output, $lichhoc[$i]->getLich());
 
-    function xemten($a)
-    {
-        $arr = [];
-        $cc = 1;
-
-        for ($i=0;$i < count($a);$i++)
-        {
-            if (!in_array($a[$i]->getTenHocPhan(), $arr))
-            {
-                echo $cc." ".$a[$i]->getTenHocPhan()."\n";
-                $cc++;
-                array_push($arr,$a[$i]->getTenHocPhan());
-            }
-        }
-    }
-
-    function xemlich($settkb)
-    {
-        for ($i=0; $i < 10; $i++)
-        {
-            for ($j=0; $j < 7; $j++)
-                echo $settkb[$i][$j]." ";
-            echo "\n";
-        }
-        echo "\n";
-    }
+    echo "Đã tìm thấy kết quả !";
+    $_SESSION['tkb'] = $output;
+    $_SESSION['idmon'] = $idhocphan;
+    $_SESSION['kqd'] = $kqdung;
 
     // Thứ 2(T8-10)
     function getLich($str)
@@ -333,14 +311,6 @@
                 return true;
         }
         return false;
-    }
-
-    function cleartkb($settkb)
-    {
-        for ($i=0; $i < 10; $i++)
-            for ($j=0; $j < 8; $j++)
-                $settkb[$i][$j] = 0;
-        return $settkb;
     }
 
     function locmon($a)

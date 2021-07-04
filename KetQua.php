@@ -33,6 +33,11 @@
     <body>
         <center>
             <?php
+                if (count($danhsach) == 0)
+                {
+                    echo "<h2 style='color: white;'>Không có trường hợp thỏa mãn yêu cầu !</h2>";
+                    return;
+                }
                 for ($i=0; $i < count($danhsach); $i++)
                 {
                     $tb[$i] = "";
